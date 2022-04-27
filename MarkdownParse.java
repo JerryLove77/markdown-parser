@@ -5,10 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+
 public class MarkdownParse {
 
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
+        // checks whether all characters for links are in the text file
+        if(!markdown.contains("[") 
+        || !markdown.contains("]") 
+        || !markdown.contains("(")
+        || !markdown.contains(")")) { 
+            return toReturn;
+        }
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
@@ -16,13 +24,25 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
-        }
+            //makes sure loop doesnot check previous indices
+            if(closeParen < currentIndex){
+                break;
+            }
+            //makes sure the hyperlink is next to the url, making it a valid link
+            if(!(closeBracket + 1 == openParen)) {  
 
+            }
+            //makes sure that this isn't an image reference
+            else if((markdown.contains("!") 
+            && !(markdown.indexOf("!",currentIndex) == openBracket - 1))
+            || !markdown.contains("!")) {
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+            }
+
+            currentIndex = closeParen+1;
+        }
         return toReturn;
     }
-
 
     public static void main(String[] args) throws IOException {
         Path fileName = Path.of(args[0]);
