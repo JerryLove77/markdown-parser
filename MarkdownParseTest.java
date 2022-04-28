@@ -16,29 +16,30 @@ public class MarkdownParseTest {
     }
     @Test
     public void testFileMDTest() throws IOException{
-        Path fileName = Path.of("test-file.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         assertEquals(List.of("https://something.com", "some-thing.html"),obj.getLinks(content));
     }
     @Test
     public void testFile2MDTest() throws IOException{
-        Path fileName = Path.of("test-file2.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file2.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         assertEquals(List.of("https://something.com", "some-page.html"),obj.getLinks(content) );
     }
     @Test
     public void testFileMD3Test() throws IOException{
-        Path fileName = Path.of("test-file3.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file3.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
-        assertEquals(List.of("some-thing.html"),obj.getLinks(content));
+        ArrayList<String> temp = new ArrayList<>();
+        assertEquals(temp,obj.getLinks(content));
     }
     
     @Test
     public void infiniteLoopMDTest() throws IOException{
-        Path fileName = Path.of("infiniteLoop.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/infiniteLoopMDTest.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         assertEquals(List.of("https://something.com","some-thing.html"),obj.getLinks(content));
@@ -46,7 +47,7 @@ public class MarkdownParseTest {
     
     @Test
     public void testFileMD4Test() throws IOException{
-        Path fileName = Path.of("test-file4.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file4.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         assertEquals(List.of("google.com"),obj.getLinks(content));
@@ -54,7 +55,7 @@ public class MarkdownParseTest {
 
     @Test
     public void testFileMD5Test() throws IOException{
-        Path fileName = Path.of("test-file5.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file5.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         ArrayList<String> temp = new ArrayList<>();
@@ -63,7 +64,7 @@ public class MarkdownParseTest {
 
     @Test
     public void testFileMD6Test() throws IOException{
-        Path fileName = Path.of("test-file6.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file6.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         ArrayList<String> temp = new ArrayList<>();
@@ -71,7 +72,7 @@ public class MarkdownParseTest {
     }
     @Test
     public void testFileMD7Test() throws IOException{
-        Path fileName = Path.of("test-file7.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file7.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
         ArrayList<String> temp = new ArrayList<>();
@@ -79,11 +80,10 @@ public class MarkdownParseTest {
     }
     @Test
     public void testFileMD8Test() throws IOException{
-        Path fileName = Path.of("test-file8.md");
+        Path fileName = Path.of("C:/Users/Zhang/Documents/GitHub/markdown-parser/test-file8.md");
         String content = Files.readString(fileName);
         MarkdownParse obj = new MarkdownParse();
-        ArrayList<String> temp = new ArrayList<>();
-        assertEquals(temp,obj.getLinks(content));
+        assertEquals(List.of("a link on the first line"),obj.getLinks(content));
     }
 
 }
