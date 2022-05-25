@@ -9,6 +9,19 @@ import java.nio.file.Path;
 import org.junit.*;
 //creating a testing class
 public class MarkdownParseTest {
+    final String Snippet1Link1 = "`google.com";
+    final String Snippet1Link2 = "google.com";
+    final String Snippet1Link3 = "ucsd.edu";
+
+    final String Snippet2Link1 = "a.com";
+    final String Snippet2Link2 = "a.com(())";
+    final String Snippet2Link3 = "example.com";
+
+    final String Snippet3Link1 = "https://www.twitter.com";
+    final String Snippet3Link2 = "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule";
+    final String Snippet3Link3 = "https://cse.ucsd.edu/";
+
+
     @Test
     //creating a method to use Junit test
     public void addition() {
@@ -86,5 +99,40 @@ public class MarkdownParseTest {
         assertEquals(List.of("a link on the first line"),obj.getLinks(content));
     }
 
+    @Test
+    public void MDPTestSnippet1() throws IOException{
+        Path snippet1Path = Path.of("TestSnippet1.md");
+        String snippet1Content = Files.readString(snippet1Path);
+        ArrayList<String> links = MarkdownParse.getLinks(snippet1Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(Snippet1Link1);
+        result.add(Snippet1Link2);
+        result.add(Snippet1Link3);
+        assertEquals(result, links);
+    }
+
+    @Test
+    public void MDPTestSnippet2() throws IOException{
+        Path snippet2Path = Path.of("TestSnippet2.md");
+        String snippet2Content = Files.readString(snippet2Path);
+        ArrayList<String> links = MarkdownParse.getLinks(snippet2Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(Snippet2Link1);
+        result.add(Snippet2Link2);
+        result.add(Snippet2Link3);
+        assertEquals(result, links);
+    }
+
+    @Test
+    public void MDPTestSnippet3() throws IOException{
+        Path snippet3Path = Path.of("TestSnippet3.md");
+        String snippet3Content = Files.readString(snippet3Path);
+        ArrayList<String> links = MarkdownParse.getLinks(snippet3Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(Snippet3Link1);
+        result.add(Snippet3Link2);
+        result.add(Snippet3Link3);
+        assertEquals(result, links);
+    }
 }
 
