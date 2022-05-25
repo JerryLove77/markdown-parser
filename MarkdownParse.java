@@ -24,6 +24,21 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
+		
+	int index = openBracket;
+            int tickNum = 0;
+            while(index < markdown.length()){
+                if(markdown.indexOf('`',index) == -1){
+                    break;
+                }
+                else if(markdown.indexOf('`', index) > openBracket &&
+                markdown.indexOf("`",index) < openParen){
+                    tickNum++;
+                }
+                index = markdown.indexOf('`', index) + 1;
+		    
+		    
+            }
             //makes sure loop doesnot check previous indices
             if(closeParen < currentIndex){
                 break;
@@ -34,8 +49,9 @@ public class MarkdownParse {
             }
             //makes sure that this isn't an image reference
             else if((markdown.contains("!") 
-            && !(markdown.indexOf("!",currentIndex) == openBracket - 1))
-            || !markdown.contains("!")) {
+            && (markdown.indexOf("!",currentIndex) == openBracket - 1))) {
+            }
+            else if(tickNum%2 == 0){
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
 
